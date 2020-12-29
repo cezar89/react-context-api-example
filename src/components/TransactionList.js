@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalContext } from '../context/GlobalState'
+import { Transaction } from './Transaction';
 
 export const TransactionList = () => {
+
+    const context = useContext(GlobalContext);
+    // we can use destructuring to get the transactions
+    const { transactions } = useContext(GlobalContext);
+
+    // here you can see the context in the internal component
+    console.log('context: ', context);
+
     return (
         <>
             <h3>History</h3>
             <ul className="list">
-                <li className="minus">
-                    Cash <span>-$400</span><button className="delete-btn">x</button>
-                </li>
+                {transactions.map(transaction => <Transaction key={transaction.id} transaction={transaction}/> )}
             </ul>
         </>
     )
